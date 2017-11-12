@@ -8,7 +8,7 @@ ADD https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${P
 
 RUN sed -i -e 's/v3\.2/edge/g' /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update texlive texlive-xetex texmf-dist ghostscript && \
+    apk add --update texlive-full texmf-dist ghostscript && \
     rm -rf /var/cache/apk/* && \
     tar -xf /tmp/pandoc-${PANDOC_VERSION}-linux.tar.gz -C /tmp && \
     mv /tmp/pandoc-${PANDOC_VERSION}/bin/* /usr/bin/ && \
