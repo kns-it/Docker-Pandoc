@@ -8,13 +8,13 @@ ENV PANDOC_VERSION="2.0.2"
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
       org.label-schema.description="Pandoc container including PDFLaTeX to build PDFs from Markdown" \
-      org.label-schema.url="https://github.com/baez90/Docker-Pandoc" \
+      org.label-schema.url="https://github.com/kns-it/Docker-Pandoc" \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/baez90/Docker-Pandoc" \
-      org.label-schema.vendor="Peter Kurfer" \
+      org.label-schema.vcs-url="https://github.com/kns-it/Docker-Pandoc" \
+      org.label-schema.vendor="KNS" \
       org.label-schema.version=$PANDOC_VERSION \
       org.label-schema.schema-version="1.0" \
-      maintainer="peter.kurfer@gmail.com"
+      maintainer="sebastian.kurfer@kns-it.de"
 
 RUN sed -i -e 's/v3\.2/edge/g' /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
