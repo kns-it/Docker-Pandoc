@@ -26,7 +26,7 @@ RUN sed -i -e 's/v3\.2/edge/g' /etc/apk/repositories && \
     rm -rf /tmp/* && \
     adduser pandoc -D -s /bin/sh
 
-ENTRYPOINT [ "/bin/sh" ]
+CMD [ "/bin/sh" ]
 
 USER pandoc
 WORKDIR /home/pandoc

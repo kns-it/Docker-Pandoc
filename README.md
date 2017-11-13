@@ -6,10 +6,16 @@
 
 ## Usage
 
-The easiest way to use this container is to mount a volume into the container and run pandoc within a shell script afterwards:
+The easiest way to use this container is to mount a volume into the container and run pandoc afterwards:
 
 ```bash
-docker run --rm -v /path/to/markdown/files:/home/pandoc baez90/docker-pandoc:latest build-pdfs.sh
+docker run --rm -v /path/to/markdown/files:/home/pandoc baez90/docker-pandoc:latest pandoc my-markdown.md -o my-pdf.pdf
+```
+
+Or to convert multiple files at once you could run a script like that:
+
+```bash
+docker run --rm -v /path/to/markdown/files:/home/pandoc baez90/docker-pandoc:latest /bin/sh build-pdfs.sh
 ```
 
 where the `build-pdfs.sh` could look like this
