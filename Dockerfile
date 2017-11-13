@@ -16,14 +16,14 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0" \
       maintainer="peter.kurfer@gmail.com"
 
-ADD https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux.tar.gz /tmp
-
 RUN sed -i -e 's/v3\.2/edge/g' /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --update texlive-full texmf-dist ghostscript && \
     rm -rf /var/cache/apk/* && \
+    wget -P /tmp https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux.tar.gz && \
     tar -xf /tmp/pandoc-${PANDOC_VERSION}-linux.tar.gz -C /tmp && \
     mv /tmp/pandoc-${PANDOC_VERSION}/bin/* /usr/bin/ && \
+    rm -rf /tmp/* && \
     adduser pandoc -D -s /bin/sh
 
 ENTRYPOINT [ "/bin/sh" ]
