@@ -18,7 +18,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
 
 RUN sed -i -e 's/v3\.2/edge/g' /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk add --update texlive-full texmf-dist ghostscript librsvg && \
+    apk add --update texlive-full texmf-dist ghostscript librsvg ttf-dejavu && \
     rm -rf /var/cache/apk/* && \
     wget -P /tmp https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux.tar.gz && \
     tar -xf /tmp/pandoc-${PANDOC_VERSION}-linux.tar.gz -C /tmp && \
