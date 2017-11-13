@@ -4,6 +4,7 @@ ARG BUILD_DATE
 ARG VCS_REF
 
 ENV PANDOC_VERSION="2.0.1.1"
+
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
       org.label-schema.description="Pandoc container including PDFLaTeX to build PDFs from Markdown" \
@@ -14,8 +15,6 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.version=$PANDOC_VERSION \
       org.label-schema.schema-version="1.0" \
       maintainer="peter.kurfer@gmail.com"
-
-
 
 ADD https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux.tar.gz /tmp
 
