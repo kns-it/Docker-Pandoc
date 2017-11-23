@@ -1,8 +1,8 @@
 # Docker-Pandoc
 
-[![](https://images.microbadger.com/badges/version/baez90/docker-pandoc.svg)](https://microbadger.com/images/baez90/docker-pandoc "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/baez90/docker-pandoc.svg)](https://microbadger.com/images/baez90/docker-pandoc "Get your own image badge on microbadger.com")
-[![](https://images.microbadger.com/badges/commit/baez90/docker-pandoc.svg)](https://microbadger.com/images/baez90/docker-pandoc "Get your own commit badge on microbadger.com")
+[![](https://images.microbadger.com/badges/version/knsit/pandoc.svg)](https://microbadger.com/images/knsit/pandoc "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/knsit/pandoc.svg)](https://microbadger.com/images/knsit/pandoc "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/commit/knsit/pandoc.svg)](https://microbadger.com/images/knsit/pandoc "Get your own commit badge on microbadger.com")
 
 ## Usage
 
