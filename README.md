@@ -23,9 +23,9 @@ where the `build-pdfs.sh` could look like this
 ```bash
 #!/bin/sh
 [ -d pdf_out ] || mkdir pdf_out
-find . -name "*.md" -type f | grep -v "README" | while IFS='' read -r PATHNAME; do
+find . -name "*.md" -type f | while IFS='' read -r PATHNAME; do
 	OUTFILE="${PATHNAME/.md/.pdf}"
-	pandoc $PATHNAME --pdf-engine=pdflatex -o pdf_out/$OUTFILE --template assets/template.latex
+	pandoc $PATHNAME --pdf-engine=pdflatex -o pdf_out/$OUTFILE
 done
 ```
 
