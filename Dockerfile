@@ -24,7 +24,10 @@ RUN sed -i -e 's/v3\.2/edge/g' /etc/apk/repositories && \
     tar -xf /tmp/pandoc-${PANDOC_VERSION}-linux.tar.gz -C /tmp && \
     mv /tmp/pandoc-${PANDOC_VERSION}/bin/* /usr/bin/ && \
     rm -rf /tmp/* && \
-    adduser pandoc -D -s /bin/sh
+    adduser pandoc -D -s /bin/sh && \
+    mkdir -p /usr/share/texmf-var/tex/xelatex/common && \
+    wget http://mirrors.ctan.org/macros/latex/contrib/etoolbox/etoolbox.sty -O /usr/share/texmf-var/tex/xelatex/common/etoolbox.sty && \
+    texhash /usr/share/texmf-var
 
 CMD [ "/bin/sh" ]
 
