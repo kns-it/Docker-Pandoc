@@ -3,7 +3,7 @@ FROM alpine:edge
 ARG BUILD_DATE
 ARG VCS_REF
 
-ENV PANDOC_VERSION="2.0.3"
+ENV PANDOC_VERSION="2.0.4"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
@@ -16,7 +16,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.schema-version="1.0" \
       maintainer="sebastian.kurfer@kns-it.de"
 
-RUN sed -i -e 's/v3\.2/edge/g' /etc/apk/repositories && \
+RUN sed -i -e 's/v3\.[0-9]*/edge/g' /etc/apk/repositories && \
     echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
     apk add --update texlive-full texmf-dist ghostscript librsvg ttf-dejavu && \
     rm -rf /var/cache/apk/* && \
