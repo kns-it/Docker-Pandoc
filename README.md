@@ -46,7 +46,7 @@ The container does not expose any container but the working directory is `/home/
 The Powershell equivalent to the bash script above could look like this:
 
 ```powershell
-Invoke-Expression ("docker run -v {0}:/home/pandoc --rm knsit/pandoc ./buildPDFs.sh" -f @(pwd).Path)
+docker run -v "$((pwd).Path):/home/pandoc" --rm knsit/pandoc ./buildPDFs.sh
 ```
 
 _Remark:_ you might get an error like
@@ -61,5 +61,5 @@ You can check if your line endings are fine e.g. with Notepad++.
 Of course it's also possible to convert just a single file:
 
 ```powershell
-Invoke-Expression ("docker run -v {0}:/home/pandoc --rm knsit/pandoc pandoc -o myDocument.pdf my-markdown-file.md" -f @(pwd).Path)
+docker run -v "$((pwd).Path):/home/pandoc" --rm knsit/pandoc pandoc -o myDocument.pdf my-markdown-file.md
 ```
