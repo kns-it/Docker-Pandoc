@@ -54,7 +54,7 @@ FROM alpine:edge
 ARG BUILD_DATE
 ARG VCS_REF
 
-ENV PANDOC_VERSION="2.5"
+ENV PANDOC_VERSION="2.6"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
