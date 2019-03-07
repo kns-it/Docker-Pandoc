@@ -54,7 +54,7 @@ FROM alpine:edge
 ARG BUILD_DATE
 ARG VCS_REF
 
-ENV PANDOC_VERSION="2.3.1"
+ENV PANDOC_VERSION="2.7"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
@@ -77,7 +77,8 @@ RUN apk add \
             ghostscript \
             librsvg \
             ttf-dejavu \
-            make && \
+            make \
+            git && \
     rm -rf /var/cache/apk/* && \
     wget -P /tmp https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux.tar.gz && \
     tar -xf /tmp/pandoc-${PANDOC_VERSION}-linux.tar.gz -C /tmp && \
