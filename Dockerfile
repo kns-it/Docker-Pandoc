@@ -1,4 +1,4 @@
-FROM alpine:edge as build
+FROM alpine:3.9 as build
 
 RUN apk add --update \
         texlive-full \
@@ -49,12 +49,12 @@ RUN apk add --update \
     cd /tmp/packages/tex/titling && \
     latex titling.ins
 
-FROM alpine:edge
+FROM alpine:3.9
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-ENV PANDOC_VERSION="2.7"
+ENV PANDOC_VERSION="2.7.2"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
