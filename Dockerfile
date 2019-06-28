@@ -54,7 +54,7 @@ FROM alpine:3.9
 ARG BUILD_DATE
 ARG VCS_REF
 
-ENV PANDOC_VERSION="2.7.2"
+ENV PANDOC_VERSION="2.7.3"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
