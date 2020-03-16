@@ -1,4 +1,4 @@
-FROM alpine:3.9 as build
+FROM alpine:latest as build
 
 RUN apk add --update \
         texlive-full \
@@ -8,25 +8,29 @@ RUN apk add --update \
         ttf-dejavu \
         libarchive-tools \
         make \
-        git && \
-    mkdir -p /tmp/packages/tex && \
-    cd /tmp/packages/tex && \
-    wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/csquotes.zip | bsdtar -xvf - && \
-    wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/mdframed.zip | bsdtar -xvf - && \
-    wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/makecmds.zip | bsdtar -xvf - && \
-    wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/filecontents.zip | bsdtar -xvf - && \
-    wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/needspace.zip | bsdtar -xvf - && \
-    wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/titlesec.zip | bsdtar -xvf - && \
-    wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/titling.zip | bsdtar -xvf - && \
-    wget -qO- http://mirror.hmc.edu/ctan//fonts/psfonts/ly1.zip | bsdtar -xvf - && \
-    wget http://mirrors.ctan.org/macros/latex/contrib/etoolbox/etoolbox.sty && \
-    wget http://ctan.mirrors.hoobly.com/macros/latex/contrib/mweights/mweights.sty && \
-    git clone https://github.com/silkeh/latex-sourcesanspro.git /tmp/sourcesanspro && \
+        git
+
+WORKDIR /tmp/packages/tex
+
+RUN wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/csquotes.zip | bsdtar -xvf -
+RUN wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/mdframed.zip | bsdtar -xvf -
+RUN wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/makecmds.zip | bsdtar -xvf -
+RUN wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/filecontents.zip | bsdtar -xvf -
+RUN wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/needspace.zip | bsdtar -xvf -
+RUN wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/titlesec.zip | bsdtar -xvf -
+RUN wget -qO- http://ctan.mirrors.hoobly.com/macros/latex/contrib/titling.zip | bsdtar -xvf -
+RUN wget -qO- http://mirrors.ctan.org/fonts/psfonts/ly1.zip | bsdtar -xvf -
+RUN wget http://mirrors.ctan.org/macros/latex/contrib/etoolbox/etoolbox.sty
+RUN wget http://ctan.mirrors.hoobly.com/macros/latex/contrib/mweights/mweights.sty
+
+RUN git clone https://github.com/silkeh/latex-sourcesanspro.git /tmp/sourcesanspro && \
     rm -rf /tmp/sourcesanspro/doc /tmp/sourcesanspro/.git && \
     mv /tmp/sourcesanspro/tex/* /tmp/packages/tex/ && \
-    mv /tmp/sourcesanspro/fonts /tmp/packages/ && \
-    cd /tmp && \
-    wget -qO- http://mirrors.ctan.org/fonts/sourcecodepro.zip | bsdtar -xvf - && \
+    mv /tmp/sourcesanspro/fonts /tmp/packages/
+
+WORKDIR /tmp
+
+RUN wget -qO- http://mirrors.ctan.org/fonts/sourcecodepro.zip | bsdtar -xvf - && \
     mv sourcecodepro/tex/* /tmp/packages/tex && \
     mkdir -p /tmp/packages/fonts/tfm/sourcecodepro && \
     mkdir -p /tmp/packages/fonts/enc/dvips/sourcecodepro && \
@@ -49,12 +53,12 @@ RUN apk add --update \
     cd /tmp/packages/tex/titling && \
     latex titling.ins
 
-FROM alpine:3.9
+FROM alpine:3.11
 
 ARG BUILD_DATE
 ARG VCS_REF
 
-ENV PANDOC_VERSION="2.7.3"
+ARG PANDOC_VERSION="2.9.2"
 
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.name="Pandoc" \
@@ -80,8 +84,7 @@ RUN apk add \
             make \
             git && \
     rm -rf /var/cache/apk/* && \
-    wget -P /tmp https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux.tar.gz && \
-    tar -xf /tmp/pandoc-${PANDOC_VERSION}-linux.tar.gz -C /tmp && \
+    wget -O - https://github.com/jgm/pandoc/releases/download/${PANDOC_VERSION}/pandoc-${PANDOC_VERSION}-linux-amd64.tar.gz | tar xvz -C /tmp/ --exclude "**/share/**" && \
     mv /tmp/pandoc-${PANDOC_VERSION}/bin/* /usr/bin/ && \
     rm -rf /tmp/* && \
     adduser pandoc -D -s /bin/sh && \
